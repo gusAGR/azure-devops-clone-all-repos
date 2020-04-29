@@ -10,13 +10,14 @@ namespace ADOSCloneAllRepos
 {
     class Program
     {
+        //============= Config [Edit these with your settings] =====================
         const string c_collectionUri = "https://dev.azure.com/sample-organization-name/";
         const string c_userName = "username@microsoft.com";
 
         // PAT needs at least read all organization and projects and git clone permissions.
         const string c_pat = "use-a-valid-pat-here";
-
         const string c_outputLocation = @"C:\Temp";
+        //==========================================================================
 
         static void Main(string[] args)
         {
