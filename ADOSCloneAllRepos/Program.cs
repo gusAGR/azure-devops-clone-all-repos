@@ -5,21 +5,19 @@ using System;
 using Microsoft.TeamFoundation.Core.WebApi;
 using System.Collections.Generic;
 using LibGit2Sharp;
+using System.IO;
 
 namespace ADOSCloneAllRepos
 {
     class Program
     {
         const string c_collectionUri = "https://dev.azure.com/sample-organization-name/";
-        const string c_projectName = "sample-project-name";
-        const string c_repoName = "sample-repo-name";
-
         const string c_userName = "username@microsoft.com";
 
         // PAT needs at least read all organization and projects and git clone permissions.
         const string c_pat = "use-a-valid-pat-here";
 
-        const string c_outputLocation = "";
+        const string c_outputLocation = @"C:\Temp";
 
         static void Main(string[] args)
         {
@@ -28,23 +26,8 @@ namespace ADOSCloneAllRepos
             // Connect to Azure DevOps Services
             VssConnection connection = new VssConnection(new Uri(c_collectionUri), creds);
 
-            GitHttpClient gitClient = connection.GetClient<GitHttpClient>();
-            List<string> repoUrls = new List<string>();
-
             ProjectHttpClient projClient = connection.GetClientAsync<ProjectHttpClient>().Result;
             var projects = projClient.GetProjects().Result;
-            foreach (var project in projects)
-            {
-                var repositories = gitClient.GetRepositoriesAsync(project.Name).Result;
-                if (repositories != null)
-                {
-                    foreach (var repo in repositories)
-                    {
-                        Console.WriteLine(repo.RemoteUrl);
-                        repoUrls.Add(repo.RemoteUrl);
-                    }
-                }
-            }
 
             var cloneOptions = new CloneOptions()
             {
@@ -55,7 +38,20 @@ namespace ADOSCloneAllRepos
                 }
             };
 
-            Repository.Clone(repoUrls[0], @"C:\Temp\test", cloneOptions);
+            GitHttpClient gitClient = connection.GetClient<GitHttpClient>();
+            foreach (var project in projects)
+            {
+                var repositories = gitClient.GetRepositoriesAsync(project.Name).Result;
+                if (repositories != null)
+                {
+                    foreach (var repo in repositories)
+                    {
+                        Console.WriteLine("Cloning: " + repo.RemoteUrl);
+                        string cloneDir = Path.Combine(c_outputLocation, repo.Name);
+                        Repository.Clone(repo.RemoteUrl, cloneDir, cloneOptions);
+                    }
+                }
+            }
         }
     }
 }
