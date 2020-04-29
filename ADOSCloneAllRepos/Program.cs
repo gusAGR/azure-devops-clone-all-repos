@@ -47,7 +47,7 @@ namespace ADOSCloneAllRepos
                     foreach (var repo in repositories)
                     {
                         Console.WriteLine("Cloning: " + repo.RemoteUrl);
-                        string cloneDir = Path.Combine(c_outputLocation, repo.Name);
+                        string cloneDir = Path.Combine(c_outputLocation, project.Name +"-"+ repo.Name);
                         Repository.Clone(repo.RemoteUrl, cloneDir, cloneOptions);
                     }
                 }
