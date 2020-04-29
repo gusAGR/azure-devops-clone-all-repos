@@ -3,7 +3,6 @@ using Microsoft.TeamFoundation.SourceControl.WebApi;
 using Microsoft.VisualStudio.Services.WebApi;
 using System;
 using Microsoft.TeamFoundation.Core.WebApi;
-using System.Collections.Generic;
 using LibGit2Sharp;
 using System.IO;
 
