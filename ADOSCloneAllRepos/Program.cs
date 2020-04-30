@@ -5,26 +5,21 @@ using System;
 using Microsoft.TeamFoundation.Core.WebApi;
 using LibGit2Sharp;
 using System.IO;
+using CommandLine;
 
 namespace ADOSCloneAllRepos
 {
     class Program
     {
-        //============= Config [Edit these with your settings] =====================
-        const string c_collectionUri = "https://dev.azure.com/sample-organization-name/";
-        const string c_userName = "username@microsoft.com";
+        static void Main(string[] args) => 
+            Parser.Default.ParseArguments<Options>(args).WithParsed(options => CloneRepositories(options));
 
-        // PAT needs at least read all organization and projects and git clone permissions.
-        const string c_pat = "use-a-valid-pat-here";
-        const string c_outputLocation = @"C:\Temp";
-        //==========================================================================
-
-        static void Main(string[] args)
+        static void CloneRepositories(Options options)
         {
-            VssCredentials creds = new VssBasicCredential(string.Empty, c_pat);
+            VssCredentials creds = new VssBasicCredential(string.Empty, options.AccessToken);
 
             // Connect to Azure DevOps Services
-            VssConnection connection = new VssConnection(new Uri(c_collectionUri), creds);
+            VssConnection connection = new VssConnection(options.CollectionUri, creds);
 
             ProjectHttpClient projClient = connection.GetClientAsync<ProjectHttpClient>().Result;
             var projects = projClient.GetProjects().Result;
@@ -33,8 +28,8 @@ namespace ADOSCloneAllRepos
             {
                 CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials
                 {
-                    Username = c_userName,
-                    Password = c_pat,
+                    Username = options.UserName,
+                    Password = options.AccessToken,
                 }
             };
 
@@ -46,7 +41,7 @@ namespace ADOSCloneAllRepos
                 {
                     foreach (var repo in repositories)
                     {
-                        string cloneDir = Path.Combine(c_outputLocation, project.Name, repo.Name);
+                        string cloneDir = Path.Combine(options.OutputPath, project.Name, repo.Name);
                         Console.WriteLine($"Cloning: {repo.RemoteUrl} to {cloneDir}");
                         Repository.Clone(repo.RemoteUrl, cloneDir, cloneOptions);
                     }
