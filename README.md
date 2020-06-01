@@ -30,7 +30,7 @@ Copyright (C) 2020 ADOSCloneAllRepos
 
   -c, --collection-uri    Required. Azure collection e.g. https://dev.azure.com/sample-organization-name/
 
-  -u, --user-name         Required. Git username e.g. username@microsoft.com
+  -u, --user-name         Required. AzureDevOps username e.g. username@microsoft.com
 
   -p, --pat               Required. Personal Access Token (PAT) for the Git repositories
 

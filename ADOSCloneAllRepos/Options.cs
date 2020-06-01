@@ -8,7 +8,7 @@ namespace ADOSCloneAllRepos
         [Option('c', "collection-uri", Required = true, HelpText = "Azure collection e.g. https://dev.azure.com/sample-organization-name/")]
         public Uri CollectionUri { get; set; }
 
-        [Option('u', "user-name", Required = true, HelpText = "Git username e.g. username@microsoft.com")]
+        [Option('u', "user-name", Required = true, HelpText = "AzureDevOps username e.g. username@microsoft.com")]
         public string UserName { get; set; }
 
         [Option('p', "pat", Required = true, HelpText = "Personal Access Token (PAT) for the Git repositories")]
