@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: ADOSCloneAllRepos
-        path: 'ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.*.nupkg'
+        path: ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.${{ steps.gitversion.outputs.semVer }}.nupkg
 
   publish_package:
     name: Publish to nuget.org
