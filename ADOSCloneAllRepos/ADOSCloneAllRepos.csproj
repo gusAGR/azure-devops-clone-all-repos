@@ -3,6 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>adoscloneallrepos</ToolCommandName>
+    <Description>Console app as a dotnet tool to clone all repositories from provided Azure DevOps organization.</Description>
+    <PackageProjectUrl>https://github.com/realrubberduckdev/azure-devops-clone-all-repos</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Authors>https://github.com/realrubberduckdev/azure-devops-clone-all-repos/graphs/contributors</Authors>
+    <Company>https://github.com/realrubberduckdev/azure-devops-clone-all-repos</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +19,10 @@
     <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="16.153.0" />
     <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.153.0" />
     <PackageReference Include="Microsoft.VisualStudio.Services.InteractiveClient" Version="16.153.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="True" PackagePath="" />
   </ItemGroup>
 
 </Project>

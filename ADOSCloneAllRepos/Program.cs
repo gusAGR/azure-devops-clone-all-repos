@@ -11,7 +11,7 @@ namespace ADOSCloneAllRepos
 {
     class Program
     {
-        static void Main(string[] args) => 
+        static void Main(string[] args) =>
             Parser.Default.ParseArguments<Options>(args).WithParsed(options => CloneRepositories(options));
 
         static void CloneRepositories(Options options)
