@@ -58,3 +58,8 @@ jobs:
           dotnet-version: 3.1.101
       - name: Push package to nuget.org
         run: dotnet nuget push ./ADOSCloneAllRepos/ADOSCloneAllRepos.${{needs.build.outputs.semVer}}.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
+      - name: Tag commit
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          tag: "${{needs.build.outputs.semVer}}"
