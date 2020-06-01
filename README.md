@@ -1,4 +1,5 @@
-![ADOSCloneAllRepos CI](https://github.com/realrubberduckdev/azure-devops-clone-all-repos/workflows/.NET%20Core/badge.svg?branch=master)
+![ADOSCloneAllRepos CI](https://github.com/realrubberduckdev/azure-devops-clone-all-repos/workflows/.NET%20Core/badge.svg?branch=master) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ADOSCloneAllRepos)](https://www.nuget.org/packages/ADOSCloneAllRepos/) [![Nuget](https://img.shields.io/nuget/dt/ADOSCloneAllRepos)](https://www.nuget.org/packages/ADOSCloneAllRepos/)
+
 
 # ADOSCloneAllRepos
 Dotnet tool to clone all repositories from provided Azure DevOps organization.
