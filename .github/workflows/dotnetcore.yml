@@ -25,21 +25,21 @@ jobs:
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v0.9.2
-    # - name: Setup .NET Core
-    #   uses: actions/setup-dotnet@v1
-    #   with:
-    #     dotnet-version: 3.1.101
-    # - name: Install dependencies
-    #   run: dotnet restore
-    # - name: Build
-    #   run: dotnet build --configuration Release --no-restore -p:Version=${{ steps.gitversion.outputs.semVer }}
-    # - name: Test
-    #   run: dotnet test --no-restore --verbosity normal
-    # - name: Upload ADOSCloneAllRepos
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: ADOSCloneAllRepos
-    #     path: ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.${{ steps.gitversion.outputs.semVer }}.nupkg
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore -p:Version=${{ steps.gitversion.outputs.semVer }}
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Upload ADOSCloneAllRepos
+      uses: actions/upload-artifact@v2
+      with:
+        name: ADOSCloneAllRepos
+        path: ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.${{ steps.gitversion.outputs.semVer }}.nupkg
 
   publish_package:
     name: Publish to nuget.org
@@ -48,16 +48,16 @@ jobs:
 
     if: github.ref == 'refs/heads/publish-to-nuget-as-tool'
     steps:
-      # - name: Download build artifact
-      #   uses: actions/download-artifact@v1
-      #   with:
-      #     name: ADOSCloneAllRepos
-      # - name: Setup .NET Core
-      #   uses: actions/setup-dotnet@v1
-      #   with:
-      #     dotnet-version: 3.1.101
-      # - name: Push package to nuget.org
-      #   run: dotnet nuget push ./ADOSCloneAllRepos/ADOSCloneAllRepos.${{needs.build.outputs.semVer}}.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
+      - name: Download build artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: ADOSCloneAllRepos
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+      - name: Push package to nuget.org
+        run: dotnet nuget push ./ADOSCloneAllRepos/ADOSCloneAllRepos.${{needs.build.outputs.semVer}}.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
       - name: Tag commit
         uses: tvdias/github-tagger@v0.0.1
         with:
