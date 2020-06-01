@@ -46,7 +46,7 @@ jobs:
     needs: build
     runs-on: windows-latest
 
-    if: github.ref == 'refs/heads/publish-to-nuget-as-tool'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v1
