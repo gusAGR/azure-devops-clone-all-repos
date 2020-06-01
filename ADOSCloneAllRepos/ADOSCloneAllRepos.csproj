@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackAsTool>true</PackAsTool>
+    <ToolCommandName>adoscloneallrepos</ToolCommandName>
     <Description>Console app as a dotnet tool to clone all repositories from provided Azure DevOps organization.</Description>
     <PackageProjectUrl>https://github.com/realrubberduckdev/azure-devops-clone-all-repos</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
