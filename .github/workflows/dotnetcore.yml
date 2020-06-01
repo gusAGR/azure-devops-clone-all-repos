@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: ADOSCloneAllRepos
-        path: ADOSCloneAllRepos\bin\Release\netcoreapp3.1
+        path: ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.*.nupkg
 
   publish_package:
     name: Publish to nuget.org
