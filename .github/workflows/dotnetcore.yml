@@ -35,7 +35,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Upload ADOSCloneAllRepos
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: ADOSCloneAllRepos
         path: ADOSCloneAllRepos\bin\Release\ADOSCloneAllRepos.${{ steps.gitversion.outputs.semVer }}.nupkg
