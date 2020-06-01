@@ -1,10 +1,25 @@
 ![ADOSCloneAllRepos CI](https://github.com/realrubberduckdev/azure-devops-clone-all-repos/workflows/.NET%20Core/badge.svg?branch=master)
 
 # ADOSCloneAllRepos
-Console app to clone all repositories from provided Azure DevOps organization.
+Dotnet tool to clone all repositories from provided Azure DevOps organization.
 
 # Usage
 
+## Installation
+Install tool from [nuget.org](https://www.nuget.org/packages/ADOSCloneAllRepos/).
+
+## Running
+If installed with `--global` or `-g` parameter, run using
+```
+ADOSCloneAllRepos.exe
+```
+
+If installed with `--local` parameter, run using
+```
+dotnet ADOSCloneAllRepos
+```
+
+## Command line reference
 Get help using the command:
 
 ```
