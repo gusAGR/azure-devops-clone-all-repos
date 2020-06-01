@@ -12,6 +12,9 @@ jobs:
   build:
     name: Build and test
     runs-on: windows-latest
+    # Map a step output to a job output
+    outputs:
+      semVer: ${{ steps.gitversion.outputs.semVer }}
 
     steps:
     - uses: actions/checkout@v2
@@ -47,10 +50,13 @@ jobs:
 
     if: github.ref == 'refs/heads/publish-to-nuget-as-tool'
     steps:
-      - name: Deploy app
-        run: |
-          echo "Deploying"
       - name: Download build artifact
         uses: actions/download-artifact@v1
         with:
           name: ADOSCloneAllRepos
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+      - name: Push package to nuget.org
+        run: dotnet nuget push ./ADOSCloneAllRepos/ADOSCloneAllRepos.${{needs.build.outputs.semVer}}.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
